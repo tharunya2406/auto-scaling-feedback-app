@@ -9,4 +9,6 @@ Feedback data stored securely in Amazon RDS (MySQL).
 CloudWatch monitors CPU metrics and triggers Auto Scaling.
 Auto Scaling replaces unhealthy EC2 instances automatically.
 High availability achieved across multiple Availability Zones.
-Access the live application: feedback-loadbalancer-370182017.ap-south-1.elb.amazonaws.com
+
+Access the live application: http://feedback-loadbalancer-370182017.ap-south-1.elb.amazonaws.com
+EC2 public IP : http://3.108.196.221
