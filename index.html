@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-card {
+            background: #ffffffcc;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            width: 350px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #instance-id {
+            color: #e74c3c;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .thankyou {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-card">
+        <h1>Feedback Form</h1>
+        <form id="feedback-form">
+            <input type="text" name="name" placeholder="Enter Name" required>
+            <input type="email" name="email" placeholder="Enter Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <select name="rating">
+                <option value="">Rate us</option>
+                <option value="1">★</option>
+                <option value="2">★★</option>
+                <option value="3">★★★</option>
+                <option value="4">★★★★</option>
+                <option value="5">★★★★★</option>
+            </select>
+            <button type="submit">Submit</button>
+            <div class="thankyou" id="thankyou-msg"></div>
+        </form>
+        <div id="instance-id">Loading instance ID...</div>
+    </div>
+
+    <script>
+        // Show instance ID
+        fetch('http://169.254.169.254/latest/meta-data/instance-id')
+            .then(response => response.text())
+            .then(id => document.getElementById('instance-id').innerText = "Served by Instance: " + id)
+            .catch(() => document.getElementById('instance-id').innerText = "Instance ID not available");
+
+        // Show thank you message on submit
+        document.getElementById('feedback-form').addEventListener('submit', function(e){
+            e.preventDefault();
+            document.getElementById('thankyou-msg').innerText = "Thank you for your feedback!";
+            this.reset();
+        });
+    </script>
+</body>
+</html>
